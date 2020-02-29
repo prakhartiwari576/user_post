@@ -35,51 +35,34 @@ const userSchema = new mongoose.Schema({
             }
         }
     },
-    tokens:[{
-        token:{
-          type:String,
-          required:true
-        }
-      }],
-    posts:[{
-        description:{
-        }
-      }]
+    token:{
+      type:String
+    }
 })
-
-userSchema.methods.addPost = async function (post) {
-  const user = this
-
-  user.posts = user.posts.concat({description:post})
-  await user.save()
-  return post
-}
 
 userSchema.methods.generateAuthToken = async function () {
     const user = this
     const token = jwt.sign({_id:user._id.toString()},'edgistifyTask')
   
-    user.tokens = user.tokens.concat({token:token})
+    user.token = token
     await user.save()
     return token
   }
 
 userSchema.statics.findByCredentials = async (email,password) => {
-    const user = await User.findOne({
-      email:email
-    })
-    var sta =  '400'
-  
-    if(!user){
-      throw new Error(sta)
-    }
-  
-    if(password !== user.password){
-      throw new Error(sta)
-    }
-    else {
-        throw new Error('200')
-    }
+  const user = await User.findOne({
+    email:email
+  })
+
+  if(!user){
+    throw new Error('Unable to login')
+  }
+
+  if(password !== user.password){
+    throw new Error('Unable to login')
+  }
+
+  return user
   }  
 
 const User = mongoose.model('User',userSchema)

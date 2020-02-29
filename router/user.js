@@ -4,14 +4,16 @@ const User = require('../models/user')
 
 router.post('/users',async (req,res)=>{
     const user = new User(req.body)
-  
+    console.log('New User: ', user)
     try{
       await user.save()
     //   sendWelcomeEmail(user.email,user.name)
       const token = await user.generateAuthToken()
+      // console.log('New token generated: ', token)
       res.status(201).send({user,token})
     } catch(error){
-      res.status(400).send(error)
+      console.error(error)
+      res.status(400).send()
     }
   })
 
@@ -21,23 +23,9 @@ router.post('/users',async (req,res)=>{
           const token = await user.generateAuthToken()
           res.send({user,token})
         }catch(error){
-        //  error.status = 400
-         res.send(error.message)
+        res.send(error)
         }
      })
 
-     router.post('/users/post', async (req,res)=>{
-       try{
-         debugger
-          const description = req.body
-          console.log(description);
-          
-          const user = await User.findById('5e59631910e276205c6b63bb')
-          const post = await user.addPost(description)
-          res.send(user)
-       }catch(e){
-        res.send(e.message)
-       }
-     })
 
 module.exports = router

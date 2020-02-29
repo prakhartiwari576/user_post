@@ -9,19 +9,22 @@ function myFunction() {
      password
  }
 
-const response = $.ajax({
+$.ajax({
     type: 'POST',
     data: JSON.stringify(user),
     contentType: 'application/json',
     url: '/users/login',
     success: function(response) {
-        if(response === '200'){
+        // if(response.user.email === user.email){
+        //     location.href = 'home'
+        // }else{
+        //     alert('Unable to Login')
+        // }
+        if(response.user.email === user.email){
             location.href = 'home'
-        }else{
-            alert('Unable to login')
+            localStorage.setItem('token', response.user.token);
         }
     }
 })
-// console.log(response['status']);
 
 }

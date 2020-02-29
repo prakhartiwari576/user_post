@@ -2,6 +2,8 @@ const express = require('express')
 const hbs = require('hbs')
 require('./db/mongooose')
 const userRouter = require('./router/user')
+const postRouter = require('./router/post')
+const Post = require('./models/post')
 
 const app = express()
 const port = /*process.env.PORT*/ 3000
@@ -10,6 +12,7 @@ app.set('view engine','hbs')
 app.use(express.static(__dirname+'/public'));
 app.use(express.json())
 app.use(userRouter)
+app.use(postRouter)
 
 app.get('/',(req,res)=>{
   res.render('homepage.hbs')
@@ -24,7 +27,11 @@ app.get('/signUp',(req,res)=>{
 })
 
 app.get('/home',(req,res)=>{
-  res.render('home.hbs')
+  const posts = Post.find()
+  for(var i in posts) {
+    console.log(i.description)
+  }
+  res.render('home.hbs',{posts})
 })
 
 app.get('/add_post',(req,res)=>{

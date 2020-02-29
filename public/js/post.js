@@ -1,19 +1,18 @@
 var user
-
+var token = localStorage.getItem('token')
 function getDescription() {
     var description = document.getElementById('description').value
 
-    user={
+    post={
         description
     }
-    debugger
-    const response = $.ajax({
+    $.ajax({
         type: 'POST',
-        data: JSON.stringify(user),
+        data: JSON.stringify(post),
         contentType: 'application/json',
-        url: '/users/post',
-        success: function(response) {
-            console.log(response);
-        }
+        headers: {
+            'Authorization': token
+        },
+        url: '/posts'
     })
 }
