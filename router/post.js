@@ -6,7 +6,8 @@ const Post = require('../models/post')
 router.post('/posts',auth,async (req,res)=>{
     const post = new Post({
       ...req.body,
-      owner:req.user._id
+      owner:req.user._id,
+      name: req.user.name
     })
   
     try{

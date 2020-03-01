@@ -1,7 +1,6 @@
 {
-  "name": "UserPostApp",
+  "name": "userpostapp",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -15,5 +14,14 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.8.9",
     "validator": "^12.1.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MUKESHSIHAG/user_post.git"
+  },
+  "bugs": {
+    "url": "https://github.com/MUKESHSIHAG/user_post/issues"
+  },
+  "homepage": "https://github.com/MUKESHSIHAG/user_post#readme",
+  "description": ""
 }
