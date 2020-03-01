@@ -4,6 +4,7 @@
 	<title>Homepage</title>
 	<link rel="stylesheet" type="text/css" href="css/homepageStyle.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
   <nav class="navbar navbar-expand-sm bg-primary row col-sm-12 fixed-top bg-info" style="height: 10%;">
@@ -29,6 +30,7 @@
           <p class="card-text">{{ this._doc.description }}</p>
         </div>
         <div class="card-footer text-muted">
+          <span><a href=""><i class="fa fa-thumbs-up"></i></a></span>&nbsp;&nbsp;&nbsp;&nbsp;
           <b> Post On: </b> {{ this._doc.createdAt }}
       </div>
       </div>

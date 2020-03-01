@@ -36,7 +36,7 @@ app.get('/home',(req,res)=>{
       console.log(allPosts[0]._doc.description)
     }  
     console.log(allPosts[0]._doc.createdAt.getFullYear());
-    
+    allPosts = allPosts.reverse()
     res.render('./home', {allPosts})
   });
   // const posts = Post.find()

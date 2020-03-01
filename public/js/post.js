@@ -15,4 +15,6 @@ function getDescription() {
         },
         url: '/posts'
     })
+
+    location.href = '/home'
 }
