@@ -6,7 +6,7 @@ const postRouter = require('./router/post')
 const Post = require('./models/post')
 
 const app = express()
-const port = /*process.env.PORT*/ 3000
+const port = process.env.PORT || 4000
 
 app.set('view engine','hbs')
 app.use(express.static(__dirname+'/public'));
@@ -27,11 +27,23 @@ app.get('/signUp',(req,res)=>{
 })
 
 app.get('/home',(req,res)=>{
-  const posts = Post.find()
-  for(var i in posts) {
-    console.log(i.description)
-  }
-  res.render('home.hbs',{posts})
+  let allPosts = []
+  Post.find({}, function(err, posts) {
+    for(var i=0; i < posts.length; i++) {
+      allPosts = allPosts.concat({...posts[i]});
+      // console.log(allPosts[i]);
+      
+      console.log(allPosts[0]._doc.description)
+    }  
+    console.log(allPosts[0]._doc.createdAt.getFullYear());
+    allPosts = allPosts.reverse()
+    res.render('./home', {allPosts})
+  });
+  // const posts = Post.find()
+  // for(var i in posts) {
+  //   console.log(posts['schema'].tree)
+  // }
+  // res.render('home.hbs',{posts})
 })
 
 app.get('/add_post',(req,res)=>{
